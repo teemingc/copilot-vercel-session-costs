@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gateway session costs</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/canvas.css?token=__CANVAS_TOKEN__">
+    <script type="module" src="/canvas.js?token=__CANVAS_TOKEN__"></script>
+</head>
+<body>
+    <main>
+        <header class="heading">
+            <h1>Gateway session costs</h1>
+            <span id="connection" class="connection" role="status">Connecting…</span>
+        </header>
+        <p class="session-line">This session <code id="session-id">—</code></p>
+        <section id="setup" class="notice" hidden aria-labelledby="setup-title">
+            <h2 id="setup-title">Costs unavailable: no accessible Gateway key</h2>
+            <p>In macOS Keychain Access, create a password item named <code>copilot-ai-gateway</code> with your Gateway key as its password. Reload extensions and allow Keychain access when prompted. Open Copilot normally—no special launcher needed. <code>AI_GATEWAY_API_KEY</code> remains an alternative. Your key never appears in this canvas or its exports.</p>
+        </section>
+        <p id="problem" class="notice error" role="alert" hidden></p>
+        <section class="reconciliation" aria-labelledby="spend-title">
+            <div class="spend-heading"><h2 id="spend-title">Confirmed Gateway spend</h2><span class="currency">USD</span></div>
+            <p id="spend" class="spend">—</p>
+            <p id="reconciliation-message" class="reconciliation-message">Loading recorded usage…</p>
+            <dl class="reconciliation-strip">
+                <div><dt>Confirmed</dt><dd id="confirmed">—</dd></div>
+                <div><dt>Pending</dt><dd id="pending">—</dd></div>
+                <div><dt>Unknown</dt><dd id="unknown">—</dd></div>
+            </dl>
+        </section>
+        <p id="coverage" class="coverage">Observed calls only. Earlier usage and disconnected periods cannot be recovered.</p>
+        <p id="tracking-since" class="tracking-since"></p>
+        <div class="toolbar">
+            <button id="retry" type="button" disabled>Retry lookups</button>
+            <a id="export" class="button secondary" download="vercel-session-costs.json" href="/export?token=__CANVAS_TOKEN__">Export JSON</a>
+        </div>
+        <p id="feedback" class="feedback" role="status"></p>
+        <section class="models" aria-labelledby="models-title">
+            <h2 id="models-title">Spend by model</h2>
+            <div id="model-list"><p class="empty">No recorded requests yet.</p></div>
+        </section>
+        <section class="requests" aria-labelledby="requests-title">
+            <div class="section-heading"><h2 id="requests-title">Request ledger</h2><span id="request-count" class="muted"></span></div>
+            <p id="empty" class="empty">Keep working with your Gateway model. Costs appear here after each recorded call.</p>
+            <div id="ledger-wrapper" class="table-scroll" tabindex="0" aria-label="Request ledger, scroll horizontally for all columns" hidden>
+                <table>
+                    <caption class="sr-only">Observed calls with verified Gateway charges. Unknown charges are not included in spend.</caption>
+                    <thead><tr><th scope="col">Time / model</th><th scope="col">Input</th><th scope="col">Output</th><th scope="col">Charge</th></tr></thead>
+                    <tbody id="ledger"></tbody>
+                </table>
+            </div>
+        </section>
+        <footer>Charges include Gateway surcharges. Any upstream BYOK list price is separate, not a provider invoice. <a href="https://vercel.com/docs/ai-gateway/observability-and-spend/usage" target="_blank" rel="noreferrer">About Gateway costs</a></footer>
+    </main>
+</body>
+</html>
